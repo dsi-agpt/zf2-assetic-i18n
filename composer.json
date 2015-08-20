@@ -24,7 +24,7 @@
              "AsseticI18n": "src/"
          },
          "classmap": [
-             "./Module.php"
+             "AsseticI18n/Module.php"
          ]
     }
 }
