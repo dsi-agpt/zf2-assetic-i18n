@@ -84,8 +84,8 @@ class AsseticI18nConfigModifier implements ServiceLocatorAwareInterface, Listene
         $filterToAdd = array(
             'filters' => array()
         );
-        $filterToAdd['filters'][\AsseticI18n\Filter\LanguageFilterFactory::$filterKey . $language] = array(
-            'name' => \AsseticI18n\Filter\LanguageFilterFactory::$filterKey . $language
+        $filterToAdd['filters'][\AsseticI18n\Filter\LanguageFilterFactory::$filterKey.'_' . $language] = array(
+            'name' => \AsseticI18n\Filter\LanguageFilterFactory::$filterKey .'-'. $language
         );
         return $filterToAdd;
     }
