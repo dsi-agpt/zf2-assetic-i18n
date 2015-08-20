@@ -35,7 +35,7 @@ Add an *available_language* entry under the translator key of your configuration
 #### At build time
 
 All the javascript collections of your assetic configuration will be expanded in th following way :
-asset_js gives en_US_asset_js, fr_FR_asset_js.
+asset_js gives en_US_asset_js, fr_FR_asset_js etc.
 Each of them receives a filter that performs replacement of codes by primary strings and translation of primary strings into the target language.
 
 #### At runtime
