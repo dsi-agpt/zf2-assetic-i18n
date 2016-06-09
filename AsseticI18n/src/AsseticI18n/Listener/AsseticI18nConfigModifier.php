@@ -2,11 +2,10 @@
 namespace AsseticI18n\Listener;
 
 use Zend\EventManager\ListenerAggregateInterface;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\Mvc\MvcEvent;
 
-class AsseticI18nConfigModifier implements ServiceLocatorAwareInterface, ListenerAggregateInterface
+class AsseticI18nConfigModifier implements ListenerAggregateInterface
 {
 
     use\Zend\ServiceManager\ServiceLocatorAwareTrait;

@@ -21,12 +21,14 @@ class Module
             ),
         );
     }
+
     public function onBootstrap(MvcEvent $e)
     {
         $eventManager = $e->getApplication()->getEventManager();
         $serviceManager = $e->getApplication()->getServiceManager();
         // TODO make the test more accurate
-        if (Console::isConsole())
+        if (Console::isConsole()) {
             $eventManager->attachAggregate($serviceManager->get('assetic-i18n-config-modifier'));
+        }
     }
 }
