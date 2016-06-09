@@ -6,13 +6,17 @@ use Assetic\Filter\FilterInterface;
 
 class LanguageFilter implements FilterInterface
 {
-
+    /** @var string Locale identifier (us_US | fr_FR | de_DE | ...) */
     private $targetLocale;
 
     private static $stringCodePattern = "/(['\"])\{([^}\"']+)\}['\"]/";
 
     use \Zend\ServiceManager\ServiceLocatorAwareTrait;
 
+    /**
+     * Constructor
+     * @param string $targetLocale en_EN | fr_FR | de_DE | ...
+     */
     public function __construct($targetLocale)
     {
         $this->targetLocale = $targetLocale;
@@ -26,14 +30,16 @@ class LanguageFilter implements FilterInterface
         $content = $asset->getContent();
         $matches = array();
         $patternSearchResult = preg_match_all(self::$stringCodePattern, $content, $matches);
-        if (FALSE === $patternSearchResult) {
+        if (false === $patternSearchResult) {
             // TODO log something
             return;
         }
+
         if (0 === $patternSearchResult) {
             // nothing to internationalize
             return;
         }
+
         $translator = $this->getTranslator();
         $globalMatches = $matches[0];
         $separators = $matches[1];

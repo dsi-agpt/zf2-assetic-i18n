@@ -1,7 +1,6 @@
 <?php
 namespace AsseticI18n\Listener;
 
-use AsseticBundle\Configuration;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\EventManager\EventManagerInterface;
@@ -9,7 +8,7 @@ use Zend\Mvc\MvcEvent;
 
 class AsseticI18nConfigModifier implements ServiceLocatorAwareInterface, ListenerAggregateInterface
 {
-    
+
     use\Zend\ServiceManager\ServiceLocatorAwareTrait;
 
     /**
@@ -33,7 +32,6 @@ class AsseticI18nConfigModifier implements ServiceLocatorAwareInterface, Listene
      */
     public function detach(EventManagerInterface $events)
     {
-        $sharedEvents = $events->getSharedManager();
         foreach ($this->listeners as $index => $listener) {
             if ($events->detach($listener)) {
                 unset($this->listeners[$index]);
@@ -46,16 +44,21 @@ class AsseticI18nConfigModifier implements ServiceLocatorAwareInterface, Listene
         $config = $this->getServiceLocator()->get('AsseticConfiguration');
         $modules = $config->getModules();
         foreach ($modules as $moduleName => $module) {
-            if (! isset($module['collections']) || ! is_array($module['collections']))
+            if (! isset($module['collections']) || ! is_array($module['collections'])) {
                 continue;
+            }
+
             $collections = $module['collections'];
             foreach ($collections as $collectionName => $collection) {
-                if (! isset($collection['assets']) || ! is_array($collection['assets']) || empty($collection['assets']))
+                if (! isset($collection['assets']) || ! is_array($collection['assets']) || empty($collection['assets'])) {
                     continue;
+                }
                     // check that the first asset endsWith .js
                 $isJavascript = self::endsWith($collection['assets'][0], '.js');
-                if (false === $isJavascript)
+                if (false === $isJavascript) {
                     continue;
+                }
+
                 unset($modules[$moduleName]['collections'][$collectionName]);
                 $languages = self::getAvailableLanguages();
                 foreach ($languages as $language) {
@@ -71,12 +74,12 @@ class AsseticI18nConfigModifier implements ServiceLocatorAwareInterface, Listene
 
     private function endsWith($haystack, $needle)
     {
-        return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE);
+        return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== false);
     }
 
     /**
      *
-     * @param string $language            
+     * @param string $language
      * @return array
      */
     private function getFilterForLanguage($language)
@@ -98,8 +101,10 @@ class AsseticI18nConfigModifier implements ServiceLocatorAwareInterface, Listene
     private function getAvailableLanguages()
     {
         $config = self::getConfig();
-        if (! isset($config['translator']) || ! isset($config['translator']['available_languages']))
+        if (! isset($config['translator']) || ! isset($config['translator']['available_languages'])) {
             throw new \DisplayLayer\ErrorHandling\Exception\ApplicationConfigurationException("Please provide translator->available_languages field in configuration ");
+        }
+
         return $config['translator']['available_languages'];
     }
 

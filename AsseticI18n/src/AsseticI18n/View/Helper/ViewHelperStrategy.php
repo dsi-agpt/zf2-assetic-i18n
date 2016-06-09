@@ -1,8 +1,6 @@
 <?php
 namespace AsseticI18n\View\Helper;
 
-use Zend\View\Renderer\PhpRenderer;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use AsseticBundle\View\ViewHelperStrategy as BaseStrategy;
 use ServiceLocatorFactory\ServiceLocatorFactory;
 
