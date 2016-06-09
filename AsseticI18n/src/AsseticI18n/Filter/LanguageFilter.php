@@ -3,7 +3,6 @@ namespace AsseticI18n\Filter;
 
 use Assetic\Asset\AssetInterface;
 use Assetic\Filter\FilterInterface;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 
 class LanguageFilter implements FilterInterface
 {
