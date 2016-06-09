@@ -3,16 +3,15 @@ namespace AsseticI18n\Filter;
 
 use Assetic\Asset\AssetInterface;
 use Assetic\Filter\FilterInterface;
-use ServiceLocatorFactory\ServiceLocatorFactory;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 
-class LanguageFilter implements FilterInterface, ServiceLocatorAwareInterface
+class LanguageFilter implements FilterInterface
 {
 
     private $targetLocale;
 
     private static $stringCodePattern = "/(['\"])\{([^}\"']+)\}['\"]/";
-    
+
     use \Zend\ServiceManager\ServiceLocatorAwareTrait;
 
     public function __construct($targetLocale)
@@ -62,7 +61,7 @@ class LanguageFilter implements FilterInterface, ServiceLocatorAwareInterface
      */
     private function getPrimaryStringProvider()
     {
-        return ServiceLocatorFactory::getInstance()->get('primary-string-provider');
+        return $this->getServiceLocator()->get('primary-string-provider');
     }
 
     /**
@@ -71,6 +70,6 @@ class LanguageFilter implements FilterInterface, ServiceLocatorAwareInterface
      */
     private function getTranslator()
     {
-        return ServiceLocatorFactory::getInstance()->get('translator');
+        return $this->getServiceLocator()->get('translator');
     }
 }
