@@ -3,18 +3,20 @@ namespace AsseticI18n\Filter;
 
 use Assetic\Asset\AssetInterface;
 use Assetic\Filter\FilterInterface;
-use ServiceLocatorFactory\ServiceLocatorFactory;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 
-class LanguageFilter implements FilterInterface, ServiceLocatorAwareInterface
+class LanguageFilter implements FilterInterface
 {
-
+    /** @var string Locale identifier (us_US | fr_FR | de_DE | ...) */
     private $targetLocale;
 
     private static $stringCodePattern = "/(['\"])\{([^}\"']+)\}['\"]/";
-    
+
     use \Zend\ServiceManager\ServiceLocatorAwareTrait;
 
+    /**
+     * Constructor
+     * @param string $targetLocale en_EN | fr_FR | de_DE | ...
+     */
     public function __construct($targetLocale)
     {
         $this->targetLocale = $targetLocale;
@@ -28,14 +30,16 @@ class LanguageFilter implements FilterInterface, ServiceLocatorAwareInterface
         $content = $asset->getContent();
         $matches = array();
         $patternSearchResult = preg_match_all(self::$stringCodePattern, $content, $matches);
-        if (FALSE === $patternSearchResult) {
+        if (false === $patternSearchResult) {
             // TODO log something
             return;
         }
+
         if (0 === $patternSearchResult) {
             // nothing to internationalize
             return;
         }
+
         $translator = $this->getTranslator();
         $globalMatches = $matches[0];
         $separators = $matches[1];
@@ -62,7 +66,7 @@ class LanguageFilter implements FilterInterface, ServiceLocatorAwareInterface
      */
     private function getPrimaryStringProvider()
     {
-        return ServiceLocatorFactory::getInstance()->get('primary-string-provider');
+        return $this->getServiceLocator()->get('primary-string-provider');
     }
 
     /**
@@ -71,6 +75,6 @@ class LanguageFilter implements FilterInterface, ServiceLocatorAwareInterface
      */
     private function getTranslator()
     {
-        return ServiceLocatorFactory::getInstance()->get('translator');
+        return $this->getServiceLocator()->get('translator');
     }
 }

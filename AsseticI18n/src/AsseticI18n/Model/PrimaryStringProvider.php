@@ -1,15 +1,11 @@
 <?php
 namespace AsseticI18n\Model;
 
-use AsseticBundle\Configuration;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\EventManager\EventManagerInterface;
-use Zend\Mvc\MvcEvent;
 use AsseticI18n\Error\MissingTextEntryException;
 
-class PrimaryStringProvider implements ServiceLocatorAwareInterface
+class PrimaryStringProvider
 {
-    
+
     use\Zend\ServiceManager\ServiceLocatorAwareTrait;
 
     public function getPrimaryStringByCode($stringCode)
