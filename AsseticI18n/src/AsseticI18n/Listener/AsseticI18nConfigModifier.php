@@ -4,11 +4,11 @@ namespace AsseticI18n\Listener;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\Mvc\MvcEvent;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
 class AsseticI18nConfigModifier implements ListenerAggregateInterface
 {
-
-    use\Zend\ServiceManager\ServiceLocatorAwareTrait;
+    use ServiceLocatorAwareTrait;
 
     /**
      * (non-PHPdoc)
