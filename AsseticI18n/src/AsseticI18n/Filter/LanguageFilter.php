@@ -49,7 +49,7 @@ class LanguageFilter implements FilterInterface
             $separator = $separators[$i];
             $stringCode = $expressions[$i];
             $primaryString = $this->getPrimaryString($stringCode);
-            $translatedString = $this->getTranslator()->translate($primaryString, 'default', $this->targetLocale);
+            $translatedString = $translator->translate($primaryString, 'default', $this->targetLocale);
             $content = str_replace($globalMatch, $separator . $translatedString . $separator, $content);
         }
         $asset->setContent($content);

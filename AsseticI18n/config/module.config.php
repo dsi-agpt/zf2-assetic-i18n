@@ -6,9 +6,9 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-return array (
-		'service_manager' => include 'services.config.php',
-		'translator' => include 'translator.config.php',
-		'assetic_configuration' => include 'assets.config.php',
-		'view_helpers' => include 'view_helpers.config.php' 
+return array(
+    'service_manager' => include 'services.config.php',
+    'translator' => include 'translator.config.php',
+    'assetic_configuration' => include 'assets.config.php',
+    'view_helpers' => include 'view_helpers.config.php'
 );
